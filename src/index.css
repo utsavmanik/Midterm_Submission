@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+body{
+    background-color: #ccc;
+    font-family: 'Oswald';
+}
+ .wrapper {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    margin-top: 80px;
+} 
+/* examples/custom-animation.css */
+
+@keyframes customEnterOverlayAnimation {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes customLeaveOverlayAnimation {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  
+  @keyframes customEnterModalAnimation {
+    0% {
+      transform: scale(0.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes customLeaveModalAnimation {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0.2);
+    }
+  }
+  .navbar-brands {
+    font-family: 'Style Script';
+    color: rgb(14, 162, 231) !important;
+    font-size: 50px;
+  }
+
+  .heart
+  {
+    border-radius: 100%;
+    margin-left: 70px;   
+    margin-top:5px;
+    position: absolute;
+  }
+
+  .cart-items{
+    display: flex;
+  }
