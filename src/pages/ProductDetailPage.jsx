@@ -5,27 +5,30 @@ import { useEffect, useState } from "react"
 import EndPoints from "../api/EndPoints"
 import { useDispatch } from "react-redux"
 import { addToCart, addToWishList } from "../slices/cartSlice"
-import {FaShoppingCart,FaHeart} from 'react-icons/fa'
+import { FaShoppingCart, FaHeart } from 'react-icons/fa'
+import ShowSpinner from "../components/ShowSpinner"
+import StarRatings from "react-star-ratings"
 
 const ProductDetailPage = (props) => {
-    const {id} = useParams()
-    const x=id
+    const { id } = useParams()
+    const [isLoading, setIsLoading] = useState(false)
     const [productDetail, setProductDetail] = useState([])
     const dispatch = useDispatch()
     const fetchData = async () => {
-        let i=0
+        let i = 0
         const response = await axios.get(EndPoints.PRODUCT_URL + id);
         try {
             console.log("Printing: " + i)
-            console.log("Id of item clicked:"+id)
+            console.log("Id of item clicked:" + id)
             setProductDetail(response.data)
-            console.log("Details: "+response.data)
+            setIsLoading(true)
+            console.log("Details: " + response.data)
         }
         catch (error) { console.log(error) }
     }
     useEffect(() => {
-            fetchData();
-        }, [id]);
+        fetchData();
+    }, [id]);
 
     const [toggle, setToggle] = useState(false)
 
@@ -39,34 +42,46 @@ const ProductDetailPage = (props) => {
     const handleAddToCart = () => {
         dispatch(addToCart(productDetail))
     }
-   
-    
+
+
 
     return (
         <>
             <NavbarComponent />
-            <div className="container">
-                <div className="wrapper">
-                    <div className="row">
-                    
-                        <div className="col-md-6">
-                            <img src={productDetail.image} alt={productDetail.image} className="img-fluid shadow" />
-                        </div>
-                        <div className="col-md-6">
-                            <h5>{productDetail.title}</h5>
-                            <p style={{
-                                fontSize: "22px",
-                                color: "#999",
-                                marginLeft: "10px",
-                            }}>{/* <span>&#8377;</span> */}${productDetail.price}</p>
-                           
-                            <p>{productDetail.description}</p>
-                            <button className="btn-primary" onClick={handleAddToCart}>Add to Cart <FaShoppingCart /></button>
-                            <button id={"addToWishList" +productDetail.id} className={toggle? 'btn-dark heart' : 'btn-danger heart'} onClick={handleAddToWishList}><FaHeart /></button>
+            {isLoading ?
+                <div className="container">
+                    <div className="wrapper">
+                        <div className="row">
+
+                            <div className="col-md-6">
+                                <img src={productDetail.image} alt={productDetail.image} className="img-fluid shadow" />
+                            </div>
+                            <div className="col-md-6">
+                                <h5>{productDetail.title}</h5>
+                                <StarRatings
+                                    rating={productDetail.rating.rate}
+                                    starRatedColor="gold"
+                                    starDimension="30px"
+                                    /*  changeRating={changeRating} */
+                                    numberOfStars={5}
+                                    name='rating'
+                                />&nbsp;&nbsp;&nbsp;
+                                <span>{productDetail.rating.count}</span>
+                                <p style={{
+                                    fontSize: "22px",
+                                    color: "#999",
+                                    marginLeft: "10px",
+                                }}>{/* <span>&#8377;</span> */}${productDetail.price}</p>
+
+                                <p>{productDetail.description}</p>
+                                <button className="btn-primary" onClick={handleAddToCart}>Add to Cart <FaShoppingCart /></button>
+                                <button id={"addToWishList" + productDetail.id} className={toggle ? 'btn-dark heart' : 'btn-danger heart'} onClick={handleAddToWishList}><FaHeart /></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                : <ShowSpinner />
+            }
         </>
     )
 }

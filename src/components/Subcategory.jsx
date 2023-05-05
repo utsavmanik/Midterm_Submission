@@ -9,7 +9,7 @@ import ShowSpinner from "./ShowSpinner"
 const SubCategory = () => {
     const [isLoading, setIsLoading] = useState(false)
     const { catId } = useParams()
-//const catId="jewelery"
+    //const catId="jewelery"
     const [category, setCategory] = useState([])
     const fetchData = async () => {
         const response = await axios.get(EndPoints.CATEGORY_URL + catId);
@@ -17,7 +17,7 @@ const SubCategory = () => {
             //setIsLoading(true)
             console.log(response.data)
             setCategory(response.data)
-            //setIsLoading(false)
+            setIsLoading(true)
         }
         catch (error) {
             console.log(error)
@@ -32,19 +32,21 @@ const SubCategory = () => {
 
 
         <div className="wrapper">
-            <br/><br/>
+            <br /><br />
             {
-                isLoading ? (<ShowSpinner />) : null
-            }
-            <div className="row">
-                {/* <div className="col-md-3"></div>
+                isLoading ?
+
+                    <div className="row">
+                        {/* <div className="col-md-3"></div>
                 <div className="col-md-6"> */}
-                {
-                    category.map(item => (<Product data={item} />))
-                }
-                {/*  </div>
+                        {
+                            category.map(item => (<Product data={item} />))
+                        }
+                        {/*  </div>
                 <div className="col-md-3"></div> */}
-            </div>
+                    </div>
+                    : (<ShowSpinner />)
+            }
         </div>
 
     )
