@@ -86,7 +86,7 @@ const WishList = () => {
                                                         <RiDeleteBin7Fill size={20} />
                                                     </button>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <button disabled="true" id={"cart" + wishListItem.id} className="btn-primary" onClick={handleMoveToCart}><FaShoppingCart /></button>
+                                                    <button /* disabled="true"  */id={"cart" + wishListItem.id} className="btn-primary" onClick={()=>handleMoveToCart(wishListItem)}><FaShoppingCart /></button>
 
                                                 </div>
                                             </div>
