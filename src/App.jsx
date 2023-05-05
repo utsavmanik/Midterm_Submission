@@ -14,6 +14,7 @@ import { Slide, ToastContainer, Zoom } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import CartPage from './pages/CartPage';
 import WishListPage from './pages/WishListPage';
+import CheckoutPage from './pages/CheckoutPage';
 function App() {
   const [theme] = useThemeHook();
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/allPrd" element={<ProductList/>}/>
           <Route path="/cart" element={<CartPage/>}/>
           <Route path="/wishlist" element={<WishListPage/>}/>
+          <Route path='/confirm' element={<CheckoutPage/>}/>
           <Route path={"/*"} element={<ErrorPage />} />     
           <Route path="/subcategory/:catId/*" element={<ErrorPage />} />     
           <Route path={"/productdetails/:id/*"} element={<ErrorPage />} />

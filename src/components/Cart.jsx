@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useThemeHook } from '../GlobalComponents/ThemeProvider'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { BsCartCheck, BsCartX } from 'react-icons/bs'
-import {RiDeleteBin7Fill} from 'react-icons/ri'
+import { RiDeleteBin7Fill } from 'react-icons/ri'
 import {
     addToCart,
     clearCart,
@@ -11,14 +11,14 @@ import {
     removeFromCart,
 } from "../slices/cartSlice";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavbarComponent from './NavbarComponent';
 
 const Cart = () => {
     const { theme } = useThemeHook()
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
     useEffect(() => {
         dispatch(getTotals());
     }, [cart, dispatch]);
@@ -35,9 +35,13 @@ const Cart = () => {
     const handleClearCart = () => {
         dispatch(clearCart());
     };
+    const checkOut = () => {
+        dispatch(clearCart())
+        navigate("/confirm")
+    }
     return (
-        <>            
-            <div className={`${theme? 'bg-light-black text-light cart-container' : 'bg-light text-black cart-container'} `}>
+        <>
+            <div className={`${theme ? 'bg-light-black text-light cart-container' : 'bg-light text-black cart-container'} `}>
                 <h2 className={`${theme ? 'text-light' : 'text-black'}`}>Shopping Cart</h2>
                 {cart.cartItems.length === 0 ? (
                     <div className="cart-empty">
@@ -70,47 +74,47 @@ const Cart = () => {
                             <h3 className="total">Total</h3>
                         </div>
                         <div>
-                        <div className="cart-summary">
-                            <button className="clear-btn" onClick={() => handleClearCart()}>
-                                Clear Cart
-                            </button>
-                            <div className="cart-checkout">
-                                <div className="subtotal">
-                                    <span>Subtotal</span>
-                                    <span className="amount">${cart.cartTotalAmount}</span>
-                                </div>
-                                <p>Taxes and shipping calculated at checkout</p>
-                                <button>Check out</button>
-                                <div className="continue-shopping">
-                                    <Link to="/">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="20"
-                                            fill="currentColor"
-                                            className="bi bi-arrow-left"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-                                            />
-                                        </svg>
-                                        <span>Continue Shopping</span>
-                                    </Link>
+                            <div className="cart-summary">
+                                <button className="clear-btn" onClick={() => handleClearCart()}>
+                                    Clear Cart
+                                </button>
+                                <div className="cart-checkout">
+                                    <div className="subtotal">
+                                        <span>Subtotal</span>
+                                        <span className="amount">${cart.cartTotalAmount}</span>
+                                    </div>
+                                    <p>Taxes and shipping calculated at checkout</p>
+                                    <button onClick={checkOut}>Check out</button>
+                                    <div className="continue-shopping">
+                                        <Link to="/">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                fill="currentColor"
+                                                className="bi bi-arrow-left"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                                                />
+                                            </svg>
+                                            <span>Continue Shopping</span>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                             {cart.cartItems &&
                                 cart.cartItems.map((cartItem) => (
-                                    <div className={`${theme? 'bg-light-black text-light cart-item' : 'bg-light text-black cart-item'} justify-content-center w-100`} key={cartItem.id}>
+                                    <div className={`${theme ? 'bg-light-black text-light cart-item' : 'bg-light text-black cart-item'} justify-content-center w-100`} key={cartItem.id}>
                                         <div className="cart-product">
                                             <img src={cartItem.image} alt={cartItem.name} />
                                             <div>
                                                 <h3>{cartItem.name}</h3>
                                                 <p>{cartItem.desc}</p>
                                                 <button onClick={() => handleRemoveFromCart(cartItem)}>
-                                                <RiDeleteBin7Fill size={20}/>
+                                                    <RiDeleteBin7Fill size={20} />
                                                 </button>
                                             </div>
                                         </div>
@@ -128,7 +132,7 @@ const Cart = () => {
                                     </div>
                                 ))}
                         </div>
-                        
+
                     </div>
                 )}
             </div>
