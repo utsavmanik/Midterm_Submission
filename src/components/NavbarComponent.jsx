@@ -43,6 +43,7 @@ const NavbarComponent = () => {
   const setMode = () => setDarkMode(!darkMode)
 
   const cart = useSelector(state => state.cart)
+  const wishList = useSelector(state => state.wishList)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -86,7 +87,7 @@ const NavbarComponent = () => {
           className={`${darkMode ? 'text-dark-primary' : 'text-light-primary'} d-flex align-items-center`}>
           <BsFillClipboardHeartFill size="2rem" />
           {
-            cart.wishListItems.length > 0 && <span className="badge badge-warning">{cart.wishListItems.length}</span>
+            wishList.wishListItems.length > 0 && <span className="badge badge-warning">{wishList.wishListItems.length}</span>
           }
         </Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Link

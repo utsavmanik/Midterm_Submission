@@ -8,20 +8,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from './GlobalComponents/ThemeProvider';
-//import store from './redux/store'
 import { Provider } from 'react-redux';
-import cartReducer from "./slices/cartSlice";
-import { configureStore } from '@reduxjs/toolkit';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-  }
-});
-
-
 
 root.render(
 

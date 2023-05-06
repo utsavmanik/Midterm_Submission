@@ -2,9 +2,10 @@ import { FaShoppingCart, FaHeart } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { useThemeHook } from "../GlobalComponents/ThemeProvider";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToWishList, getTotals } from "../slices/cartSlice";
-import { useEffect, useState } from "react";
+import { addToCart } from "../slices/cartSlice";
+import {  useState } from "react";
 import StarRatings from "react-star-ratings";
+import { addToWishList } from "../slices/wishListSlice";
 
 const Product = (product) => {
     const [theme] = useThemeHook();

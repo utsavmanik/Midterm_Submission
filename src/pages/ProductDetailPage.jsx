@@ -4,10 +4,11 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import EndPoints from "../api/EndPoints"
 import { useDispatch } from "react-redux"
-import { addToCart, addToWishList } from "../slices/cartSlice"
+import { addToCart } from "../slices/cartSlice"
 import { FaShoppingCart, FaHeart } from 'react-icons/fa'
 import ShowSpinner from "../components/ShowSpinner"
 import StarRatings from "react-star-ratings"
+import { addToWishList } from "../slices/wishListSlice"
 
 const ProductDetailPage = (props) => {
     const { id } = useParams()

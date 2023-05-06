@@ -3,22 +3,19 @@ import { useThemeHook } from '../GlobalComponents/ThemeProvider'
 import { FaShoppingCart } from 'react-icons/fa'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
 import {
-    addToCart,
-    clearCart,
-    clearWishList,
-    decreaseCart,
-    getTotals,
-    moveToCart,
-    removeFromCart,
+    clearWishList,   
     removeFromWishList,
-} from "../slices/cartSlice";
+} from "../slices/wishListSlice";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToCart, getTotals } from '../slices/cartSlice';
 
 
 const WishList = () => {
     const { theme } = useThemeHook()
     const cart = useSelector((state) => state.cart);
+    const wishList=useSelector(state=>state.wishList)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -40,7 +37,7 @@ const WishList = () => {
         <>
             <div className={`${theme ? 'bg-light-black text-light cart-container' : 'bg-light text-black cart-container'} `}>
                 <h2 className={`${theme ? 'text-light' : 'text-black'}`}>My Wishlist</h2>
-                {cart.wishListItems.length === 0 ? (
+                {wishList.wishListItems.length === 0 ? (
                     <div className="cart-empty">
                         <p>Your Wishlist is empty!!</p>
                         <div className="start-shopping">
@@ -67,8 +64,8 @@ const WishList = () => {
 
 
                         <div className="cart-items">
-                            {cart.wishListItems &&
-                                cart.wishListItems.map((wishListItem) => (
+                            {wishList.wishListItems &&
+                                wishList.wishListItems.map((wishListItem) => (
                                     <div className="row">
                                         <div className="col-sm" id={wishListItem.id}>
                                             <div className={`${theme} ? 'bg-light-black text-light' : 'bg-lihgt text-black'} text-center p-0 overflow-hidden shadow mx-auto mb-4`} >
@@ -86,7 +83,7 @@ const WishList = () => {
                                                         <RiDeleteBin7Fill size={20} />
                                                     </button>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <button /* disabled="true"  */id={"cart" + wishListItem.id} className="btn-primary" onClick={()=>handleMoveToCart(wishListItem)}><FaShoppingCart /></button>
+                                                    <button /* disabled="true"  */ id={"wishList" + wishListItem.id} className="btn-primary" onClick={() => handleMoveToCart(wishListItem)}><FaShoppingCart /></button>
 
                                                 </div>
                                             </div>
