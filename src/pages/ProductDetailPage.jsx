@@ -34,7 +34,7 @@ const ProductDetailPage = (props) => {
     const [toggle, setToggle] = useState(false)
 
     const handleAddToWishList = () => {
-        setToggle(true)
+        setToggle(toggle?false:true)
         dispatch(addToWishList(productDetail))
         //console.log("Wished ? "+cart.wishListItems.wished)
         //console.log("toggle "+toggle)
@@ -76,7 +76,7 @@ const ProductDetailPage = (props) => {
 
                                 <p>{productDetail.description}</p>
                                 <button className="btn-primary" onClick={handleAddToCart}>Add to Cart <FaShoppingCart /></button>
-                                <button id={"addToWishList" + productDetail.id} className={toggle ? 'btn-dark heart' : 'btn-danger heart'} onClick={handleAddToWishList}><FaHeart /></button>
+                                <button id={"addToWishList" + productDetail.id} className={toggle ? 'btn-danger heart' : 'btn-dark heart'} onClick={handleAddToWishList}><FaHeart /></button>
                             </div>
                         </div>
                     </div>

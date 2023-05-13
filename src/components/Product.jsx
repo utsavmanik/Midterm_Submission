@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import { useThemeHook } from "../GlobalComponents/ThemeProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../slices/cartSlice";
-import {  useState } from "react";
+import { useState } from "react";
 import StarRatings from "react-star-ratings";
-import { addToWishList } from "../slices/wishListSlice";
+import { addToWishList, removeFromWishList } from "../slices/wishListSlice";
 
 const Product = (product) => {
     const [theme] = useThemeHook();
@@ -20,12 +20,12 @@ const Product = (product) => {
         dispatch(addToCart(product.data))
     }
     const handleAddToWishList = () => {
-        setToggle(true)
+        setToggle(toggle ? false : true)
         dispatch(addToWishList(product.data))
         //console.log("Wished ? "+cart.wishListItems.wished)
         //console.log("toggle "+toggle)
     }
-
+   
     return (
 
         <div className="col-sm-3" id={id}>
@@ -35,8 +35,12 @@ const Product = (product) => {
                         <img src={image} alt={title + " image"} className="card-img-top" style={{ width: "200px", height: "250px" }} />
                     </span>
                 </Link>
+                <button id={"button" + id} className={toggle ? 'btn-danger heart' : 'btn-dark heart'}
+                    onClick={handleAddToWishList}><FaHeart /></button>
+                {/*  {toggle
+                    ? <button id={"button" + id} className={'btn-dark heart'} onClick={handleAddToWishList}><FaHeart /></button>
+                    : <button id={"button" + id} className={'btn-danger heart'} onClick={handleRemoveFromWishList}><FaHeart /></button>} */}
 
-                <button id={"button" + id} className={toggle ? 'btn-dark heart' : 'btn-danger heart'} onClick={handleAddToWishList}><FaHeart /></button>
                 <div className="card-body">
                     <h6 className="card-title">{title}</h6>
                     <h4>

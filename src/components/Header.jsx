@@ -6,7 +6,7 @@ const Header = () => {
         <>
            
                 <Carousel height="200px"
-                variant="dark" fade
+                 variant="dark" fade
                 nextIcon={<FcNext size={50}/>}
                 prevIcon={<FcPrevious size={50}/>}
                 prevLabel=""

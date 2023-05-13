@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 
 
 const initialState = {
-    wishListItems: localStorage.getItem("cartItems")
-        ? JSON.parse(localStorage.getItem("cartItems"))
+    wishListItems: localStorage.getItem("wishListItems")
+        ? JSON.parse(localStorage.getItem("wishListItems"))
         : [],
     wishListTotalQuantity: 0
 }
@@ -25,21 +25,21 @@ const wishListSlice = createSlice({
                 });
             } else {
                 //removeFromWishList
-                /* state.wishListItems.map((wishListItem) => {
-                  if (wishListItem.id === action.payload.id) {
-                    const nextWishListItems = state.wishListItems.filter(
-                      (item) => item.id !== wishListItem.id
-                    );
-        
-                    state.wishListItems = nextWishListItems;
-        
-                    toast.error(`${wishListItem.title} removed from Wishlist`, {
-                      position: "bottom-left",
-                    });
-                  }
-                  localStorage.setItem("wishListItems", JSON.stringify(state.wishListItems));
-                  return state;
-                }); */
+                state.wishListItems.map((wishListItem) => {
+                    if (wishListItem.id === action.payload.id) {
+                        const nextWishListItems = state.wishListItems.filter(
+                            (item) => item.id !== wishListItem.id
+                        );
+
+                        state.wishListItems = nextWishListItems;
+
+                        toast.error(`${wishListItem.title} removed from Wishlist`, {
+                            position: "bottom-right",
+                        });
+                    }
+                    localStorage.setItem("wishListItems", JSON.stringify(state.wishListItems));
+                    return state;
+                });
             }
             localStorage.setItem("wishListItems", JSON.stringify(state.wishListItems));
         },
@@ -51,7 +51,7 @@ const wishListSlice = createSlice({
                             item.id !== wishListItem.id
                     )
                     state.wishListItems = tempWishListItems
-                    toast.error(`${wishListItem.title} removed from cart`,
+                    toast.error(`${wishListItem.title} removed from Wishlist`,
                         {
                             position: "bottom-right"
                         })
@@ -62,9 +62,9 @@ const wishListSlice = createSlice({
         },
         clearWishList: (state, action) => {
             state.wishListItems = []
-            localStorage.setItem("wishListItem", JSON.stringify(state.wishListItems))
-            toast.error("Wishlist Cleared", "postion-right")
-        }
+            localStorage.setItem("wishListItems", JSON.stringify(state.wishListItems))
+            toast.error("Wishlist cleared", { position: "bottom-right" });
+        }        
     }
 })
 
